@@ -36,6 +36,7 @@ namespace Sample.Ui.Students
             this.StudentEnrollmentDate = new System.Windows.Forms.Label();
             this.CourseEnrollments = new System.Windows.Forms.DataGridView();
             this.CourseEnrollmentsLabel = new System.Windows.Forms.Label();
+            this.Save = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.CourseEnrollments)).BeginInit();
             this.SuspendLayout();
             // 
@@ -108,7 +109,6 @@ namespace Sample.Ui.Students
             this.CourseEnrollments.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.CourseEnrollments.Location = new System.Drawing.Point(11, 109);
             this.CourseEnrollments.Name = "CourseEnrollments";
-            this.CourseEnrollments.ReadOnly = true;
             this.CourseEnrollments.Size = new System.Drawing.Size(645, 340);
             this.CourseEnrollments.TabIndex = 6;
             // 
@@ -122,10 +122,22 @@ namespace Sample.Ui.Students
             this.CourseEnrollmentsLabel.TabIndex = 7;
             this.CourseEnrollmentsLabel.Text = "Current Course Enrollments";
             // 
+            // Save
+            // 
+            this.Save.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.Save.Location = new System.Drawing.Point(557, 79);
+            this.Save.Name = "Save";
+            this.Save.Size = new System.Drawing.Size(99, 23);
+            this.Save.TabIndex = 8;
+            this.Save.Text = "Save Changes";
+            this.Save.UseVisualStyleBackColor = true;
+            this.Save.Click += new System.EventHandler(this.Save_Click);
+            // 
             // StudentHomeControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.Save);
             this.Controls.Add(this.CourseEnrollmentsLabel);
             this.Controls.Add(this.CourseEnrollments);
             this.Controls.Add(this.StudentEnrollmentDate);
@@ -152,5 +164,6 @@ namespace Sample.Ui.Students
         private System.Windows.Forms.Label StudentEnrollmentDate;
         private System.Windows.Forms.DataGridView CourseEnrollments;
         private System.Windows.Forms.Label CourseEnrollmentsLabel;
+        private System.Windows.Forms.Button Save;
     }
 }

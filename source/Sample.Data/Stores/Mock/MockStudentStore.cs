@@ -79,6 +79,7 @@ namespace Sample.Data.Stores.Mock
             foreach (var course in courses) {
                 var courseEnrollment = new CourseEnrollment()
                 {
+                    Id = course.Id + 100,
                     Course = course,
                     Student = student,
                     Grade = 0.0M    // the "M" means to interpret the number as a decimal

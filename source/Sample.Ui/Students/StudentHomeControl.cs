@@ -38,6 +38,7 @@ namespace Sample.Ui.Students
 
         private readonly IStudentStore studentStore;
         private readonly Student student;
+        private DataTable courseEnrollmentsDataTable = new DataTable();
 
         protected override void OnLoad(EventArgs e)
         {
@@ -58,18 +59,37 @@ namespace Sample.Ui.Students
             // load the data from the store (the database)
             var courseEnrollments = studentStore.GetCourseEnrollmentsByStudentId(student.Id);
 
-            // now make a data table to hold the data, and add columns
-            var dataTable = new DataTable();
-            dataTable.Columns.Add("Course");
-            dataTable.Columns.Add("Grade");
+            // add columns to the data table--for non-editable columns, 
+            // get a ref to the new column and set it to read-only
+            var idColumn = courseEnrollmentsDataTable.Columns.Add("Id");
+            idColumn.ReadOnly = true;
+            var courseColumn = courseEnrollmentsDataTable.Columns.Add("Course");
+            courseColumn.ReadOnly = true;
+            courseEnrollmentsDataTable.Columns.Add("Grade");
 
             // iterate over the data you got and add it, making sure to match the number of columns
             foreach (var courseEnrollment in courseEnrollments) {
-                dataTable.Rows.Add(courseEnrollment.Course.Name, courseEnrollment.Grade);
+                courseEnrollmentsDataTable.Rows.Add(
+                    courseEnrollment.Id, 
+                    courseEnrollment.Course.Name, 
+                    courseEnrollment.Grade);
             }
 
-            // set the data grid view's data source to your table to display the data
-            CourseEnrollments.DataSource = dataTable;
+            // set the data grid view's data source to your table to display the data            
+            CourseEnrollments.DataSource = courseEnrollmentsDataTable;
+            courseEnrollmentsDataTable.AcceptChanges();     // this sets all the rows to "unmodified" state so you can detect the changed ones later
+        }
+
+        private void Save_Click(object sender, EventArgs e)
+        {
+            var changedRows = courseEnrollmentsDataTable.GetChanges(DataRowState.Modified)?.Rows;
+
+            if (changedRows?.Count == 0) {
+                return;
+            }
+
+            // to update the database, you'll want to add a method to the store that accepts course enrollments
+            // todo: add a method to the interface and then call it here
         }
     }
 }
