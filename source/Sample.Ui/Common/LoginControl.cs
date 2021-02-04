@@ -28,7 +28,9 @@ namespace Sample.Ui.Common
         {
             base.OnLoad(e);
 
+            // set ui properties
             this.Dock = DockStyle.Fill;
+            this.UserTypes.DropDownStyle = ComboBoxStyle.DropDownList;
 
             // fill the drop-down list with the user types (except for unknown)
             this.UserTypes.DataSource = Enum.GetValues(typeof(UserType))
@@ -66,13 +68,13 @@ namespace Sample.Ui.Common
             UserControl control = null;
             switch (loginResult.User.UserType) {
                 case UserType.Administrator:
-                    //home = new AdminHome(loginResult.User.Id);
+                    //control = new AdminHomeControl(loginResult.User.Id);
                     break;
                 case UserType.Advisor:
-                    //home = new AdvisorHome(loginResult.User.Id);
+                    //control = new AdvisorHomeControl(loginResult.User.Id);
                     break;
                 case UserType.Instructor:
-                    //home = new InstructorHome(loginResult.User.Id);
+                    //control = new InstructorHomeControl(loginResult.User.Id);
                     break;
                 case UserType.Student:
                     control = new StudentHomeControl(controlParent, loginResult.User.Id);

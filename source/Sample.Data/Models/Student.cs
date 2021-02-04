@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Sample.Data.Models
 {
@@ -8,5 +9,8 @@ namespace Sample.Data.Models
         public string Name { get; set; }
         public string Email { get; set; }
         public DateTime EnrollmentDate { get; set; }
+
+        private readonly List<CourseEnrollment> enrollments = new List<CourseEnrollment>();
+        public List<CourseEnrollment> Enrollments => enrollments;
     }
 }
