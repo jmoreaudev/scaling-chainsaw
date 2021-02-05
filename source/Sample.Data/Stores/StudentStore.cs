@@ -1,37 +1,56 @@
-﻿using Sample.Data.Models;
+﻿using Microsoft.Data.Sqlite;
+using Sample.Data.Models;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
+using System.IO;
+using System.Reflection;
+using Dapper;
+using System.Linq;
 
 namespace Sample.Data.Stores
 {
     public class StudentStore : IStudentStore
     {
-        // implement methods to get student data from the database
+        private readonly string databasePath;
 
         public Student GetStudentById(int id)
         {
-            SqlConnection conn = new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB; AttachDbFilename =\\uem.walton.uark.edu\UEMProfiles_Lab$\les014\RedirectedFolders\Documents\loginadvisor.mdf; Integrated Security = True; Connect Timeout = 30");
-            SqlDataAdapter sda = new SqlDataAdapter($"SELECT TOP(1) Id, FirstName, LastName, Email FROM Students WHERE Id = {id}", conn);
-            DataTable dt = new DataTable();
-            sda.Fill(dt);
+            Student student = null;
 
-            var student = new Student();
-            student.Id = dt.Rows[0].Field<int>("Id");
-            student.Name = $"{dt.Rows[0].Field<string>("FirstName")} {dt.Rows[0].Field<string>("LastName")}";
-            student.Email = dt.Rows[0].Field<string>("Email");
+            using (var connection = new SqliteConnection(DataHelper.GetDatabaseFilePath())) {
+                connection.Open();
+                student = connection.QueryFirst<Student>($"SELECT * FROM Students WHERE Id = {id} LIMIT 1");
+            }
+
+            return student;
+        }
+
+        public Student GetStudentByUserId(int id)
+        {
+            Student student = null;
+
+            using (var connection = new SqliteConnection(DataHelper.GetDatabaseFilePath())) {
+                connection.Open();
+                student = connection.QueryFirst<Student>($"SELECT * FROM Students WHERE UserId = {id} LIMIT 1");
+            }
 
             return student;
         }
 
         public List<Student> GetStudents()
         {
-            throw new System.NotImplementedException();
+            var students = new List<Student>();
+
+            using (var connection = new SqliteConnection(databasePath)) {
+                connection.Open();
+                students.AddRange(connection.Query<Student>($"SELECT * FROM Students"));
+            }
+
+            return students;
         }
 
         public List<CourseEnrollment> GetCourseEnrollmentsByStudentId(int id)
         {
-            throw new System.NotImplementedException();
+            return new List<CourseEnrollment>();
         }
     }
 }

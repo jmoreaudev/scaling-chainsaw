@@ -25,7 +25,7 @@ namespace Sample.Ui.Students
             // load data for the student whose id was passed into the constructor--
             // we only want to do this once when the screen loads so that we don't 
             // have to call the database many times
-            student = studentStore.GetStudentById(id);
+            student = studentStore.GetStudentByUserId(id);
 
             // show the student's basic info at the top of the screen--
             // this really just takes the student info we've already loaded and updates the screen;

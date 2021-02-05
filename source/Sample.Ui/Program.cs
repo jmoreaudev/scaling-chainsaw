@@ -1,5 +1,8 @@
-﻿using Sample.Ui.Common;
+﻿using Microsoft.Data.Sqlite;
+using Sample.Ui.Common;
 using System;
+using System.IO;
+using System.Reflection;
 using System.Windows.Forms;
 
 namespace Sample.Ui

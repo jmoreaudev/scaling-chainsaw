@@ -19,7 +19,7 @@ namespace Sample.Ui.Common
             this.controlParent = controlParent;
 
             // create the login manager, which handles all the login requests
-            this.loginManager = new MockLoginManager();
+            this.loginManager = new LoginManager();
         }
 
         private readonly IControlParent controlParent;

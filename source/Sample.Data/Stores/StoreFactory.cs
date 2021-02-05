@@ -9,7 +9,7 @@ namespace Sample.Data.Stores
     {
         public static IStudentStore BuildStudentStore()
         {
-            return new MockStudentStore();
+            return new StudentStore();
         }
 
         public static IInstructorStore BuildInstructorStore()

@@ -31,6 +31,19 @@ namespace Sample.Data.Stores.Mock
             return student;
         }
 
+        public Student GetStudentByUserId(int id)
+        {
+            var student = new Student()
+            {
+                Id = id,
+                Name = "Mock Student",
+                Email = "student@university.edu",
+                EnrollmentDate = new DateTime(2021, 1, 1)
+            };
+
+            return student;
+        }
+
         public List<Student> GetStudents()
         {
             var students = new List<Student>();

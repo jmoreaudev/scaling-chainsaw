@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Microsoft.Data.Sqlite;
+using System;
+using System.IO;
+using System.Reflection;
 using System.Windows.Forms;
 
 namespace Sample.Ui.Common
@@ -10,6 +13,15 @@ namespace Sample.Ui.Common
         public ApplicationContainer()
         {
             InitializeComponent();
+
+            // create the sqlite database if it doesn't already exist
+            var path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            using (var sqlite2 = new SqliteConnection($@"Data Source={path}\university_data.sqlite")) {
+                sqlite2.Open();
+                //string sql = "create table highscores (name varchar(20), score int)";
+                //SqliteCommand command = new SqliteCommand(sql, sqlite2);
+                //command.ExecuteNonQuery();
+            }
         }
 
         private UserControl currentControl;

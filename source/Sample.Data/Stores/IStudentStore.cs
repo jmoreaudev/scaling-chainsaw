@@ -9,6 +9,8 @@ namespace Sample.Data.Stores
 
         Student GetStudentById(int id);
 
+        Student GetStudentByUserId(int id);
+
         List<CourseEnrollment> GetCourseEnrollmentsByStudentId(int id);
     }
 }

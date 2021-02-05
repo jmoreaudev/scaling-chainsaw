@@ -1,4 +1,9 @@
-﻿using System;
+﻿using Dapper;
+using Microsoft.Data.Sqlite;
+using Sample.Data;
+using Sample.Data.Models;
+using System;
+using System.Linq;
 
 namespace Sample.Security
 {
@@ -6,10 +11,24 @@ namespace Sample.Security
     {
         public LoginResult Login(string username, string password, UserType userType)
         {
-            throw new NotImplementedException();
+            using (var connection = new SqliteConnection(DataHelper.GetDatabaseFilePath())) {
+                connection.Open();
+                var user = connection
+                    .Query<User>($"SELECT * FROM Users WHERE Username = '{username}' AND Password = '{password}' AND UserType = '{userType}' LIMIT 1")
+                    .FirstOrDefault();
 
-            // todo: update this class to call the database and return a login result--
-            // you can adapt the existing database code in Form1, if you like
+                if (user == null) {
+                    return new LoginResult("The credentials were not valid");
+                }
+
+                var applicationUser = new ApplicationUser()
+                {
+                    Id = user.Id,
+                    Username = user.Username,
+                    UserType = userType
+                };
+                return new LoginResult(applicationUser);
+            }            
         }
     }
 }
