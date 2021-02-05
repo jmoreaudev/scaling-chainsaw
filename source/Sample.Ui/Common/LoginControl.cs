@@ -1,5 +1,6 @@
 ﻿using Sample.Security;
 using Sample.Security.Mock;
+using Sample.Ui.Instructors;
 using Sample.Ui.Students;
 using System;
 using System.Data;
@@ -74,7 +75,7 @@ namespace Sample.Ui.Common
                     //control = new AdvisorHomeControl(loginResult.User.Id);
                     break;
                 case UserType.Instructor:
-                    //control = new InstructorHomeControl(loginResult.User.Id);
+                    control = new InstructorHomeControl(controlParent, loginResult.User.Id);
                     break;
                 case UserType.Student:
                     control = new StudentHomeControl(controlParent, loginResult.User.Id);

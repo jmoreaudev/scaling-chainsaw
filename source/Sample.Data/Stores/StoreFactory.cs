@@ -11,5 +11,10 @@ namespace Sample.Data.Stores
         {
             return new MockStudentStore();
         }
+
+        public static IInstructorStore BuildInstructorStore()
+        {
+            return new MockInstructorStore();
+        }
     }
 }

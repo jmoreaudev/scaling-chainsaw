@@ -59,6 +59,12 @@
     <Compile Include="Common\LoginControl.Designer.cs">
       <DependentUpon>LoginControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Instructors\InstructorHomeControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Instructors\InstructorHomeControl.Designer.cs">
+      <DependentUpon>InstructorHomeControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ApplicationState.cs" />
@@ -73,6 +79,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Common\LoginControl.resx">
       <DependentUpon>LoginControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Instructors\InstructorHomeControl.resx">
+      <DependentUpon>InstructorHomeControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -99,11 +108,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Admins\" />
-    <Folder Include="Advisors\" />
-    <Folder Include="Instructors\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Sample.Data\Sample.Data.csproj">
       <Project>{4730a6fb-9304-4a29-8ab4-f768776f98df}</Project>

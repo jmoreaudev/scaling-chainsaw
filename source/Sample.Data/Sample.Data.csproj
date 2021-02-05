@@ -43,9 +43,12 @@
   <ItemGroup>
     <Compile Include="Models\CourseEnrollment.cs" />
     <Compile Include="Models\Course.cs" />
+    <Compile Include="Models\Instructor.cs" />
     <Compile Include="Models\Student.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Stores\IInstructorStore.cs" />
     <Compile Include="Stores\IStudentStore.cs" />
+    <Compile Include="Stores\Mock\MockInstructorStore.cs" />
     <Compile Include="Stores\StoreFactory.cs" />
     <Compile Include="Stores\StudentStore.cs" />
     <Compile Include="Stores\Mock\MockStudentStore.cs" />
